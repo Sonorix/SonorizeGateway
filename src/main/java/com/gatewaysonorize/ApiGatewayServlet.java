@@ -51,7 +51,8 @@ public class ApiGatewayServlet extends HttpServlet {
             "login", "users",
             "register", "users",
             "contract", "contracts",
-            "payment", "contracts"
+            "payment", "contracts",
+            "eventos", "contracts"
     );
 
     /**

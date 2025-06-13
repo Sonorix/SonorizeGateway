@@ -18,8 +18,8 @@ Actualmente, el gateway da soporte a los siguientes microservicios:
 1. **Users-ms** - Gestión de usuarios
    - Endpoints: `/login`, `/register`
 
-2. **Contracts-payments-ms** - Gestión de contratos y pagos 
-   - Endpoints: `/contract`, `/payment`
+2. **Contracts-payments-ms** - Gestión de contratos, pagos y eventos
+   - Endpoints: `/contract`, `/payment`, `/eventos`
 
 ## Configuración
 
@@ -88,7 +88,6 @@ POST /api/contract
 Payload:
 ```json
 {
-  "idUsuario": "uuid-del-usuario",
   "idEvento": "uuid-del-evento",
   "idMusico": "uuid-del-musico",
   "pagoTotal": 1000.50,
@@ -109,6 +108,23 @@ Payload:
   "metodoPago": "Tarjeta",
   "monto": 500.25,
   "estado": "Pendiente"
+}
+```
+
+**Crear un Evento**
+
+```
+POST /api/eventos
+```
+
+Payload:
+```json
+{
+  "idCliente": "uuid-del-cliente",
+  "nombreEvento": "Concierto Benéfico",
+  "fechaEvento": "2025-06-13 18:00:00",
+  "ubicacion": "Teatro Municipal",
+  "estado": "Planificación"
 }
 ```
 
@@ -145,7 +161,6 @@ curl -X POST http://localhost:8080/GatewaySonorize/api/login \
 curl -X POST http://localhost:8080/GatewaySonorize/api/contract \
   -H "Content-Type: application/json" \
   -d '{
-    "idUsuario": "11111111-1111-1111-1111-111111111111",
     "idEvento": "22222222-2222-2222-2222-222222222222",
     "idMusico": "33333333-3333-3333-3333-333333333333",
     "pagoTotal": 2000.00,
@@ -163,6 +178,20 @@ curl -X POST http://localhost:8080/GatewaySonorize/api/payment \
     "metodoPago": "PayPal",
     "monto": 1000.00,
     "estado": "Procesando"
+  }'
+```
+
+**Crear un evento:**
+
+```bash
+curl -X POST http://localhost:8080/GatewaySonorize/api/eventos \
+  -H "Content-Type: application/json" \
+  -d '{
+    "idCliente": "55555555-5555-5555-5555-555555555555",
+    "nombreEvento": "Concierto Benéfico",
+    "fechaEvento": "2025-06-13 18:00:00",
+    "ubicacion": "Teatro Municipal",
+    "estado": "Planificación"
   }'
 ```
 
